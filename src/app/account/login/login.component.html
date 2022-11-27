@@ -1,0 +1,38 @@
+
+
+<div class="jumbotron vertical-center">
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form">
+                <h2>Login Form</h2>
+                <mat-form-field appearance="fill">
+                    <mat-label>Enter your login</mat-label>
+                    <input matInput formControlName="login">
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Enter your password</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                    <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+            
+                <button type="submit" mat-raised-button color="primary">Log In</button>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col"><div class="center">
+            <button class="reg-btn"  type="submit" mat-raised-button color="basic" routerLink="/account/register">Register</button>
+            </div>
+            <div class="center">
+                <span class="forgotter-text-btn" routerLink="/account/app-reset-password-request">Forgotten password?</span>
+                </div></div>
+    </div>
+</div>
+
+</div>
+

@@ -1,0 +1,32 @@
+.login-form {
+  width: 50%;
+  margin: 60px auto 10px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.center {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.reg-btn {
+  width: 450px;
+}
+
+.center .forgotter-text-btn {
+  font-size: 20px;
+  color: blue;
+}
+
+.center span:hover {
+  font-size: 15px;
+  color: red;
+  cursor: pointer;
+}

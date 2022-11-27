@@ -1,0 +1,150 @@
+.container {
+  width: 700px;
+}
+
+#textInput {
+  margin: 0 0 5px;
+  padding: 5px;
+  width: 653px;
+  height: 38px;
+  font: 1em/1.5 Verdana, Sans-Serif;
+  font-size: 23px;
+  background: #fff;
+  border: 1px solid #f9f9f9;
+  border-radius: 5px;
+}
+
+#keyboard {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#keyboard li {
+  float: left;
+  margin: 0 5px 5px 0;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #f9f9f9;
+  border-radius: 5px;
+}
+
+.capslock,
+.tab,
+.left-shift {
+  clear: left;
+}
+
+#keyboard .tab,
+#keyboard .delete {
+  width: 70px;
+}
+
+#keyboard .capslock {
+  width: 80px;
+}
+
+#keyboard .return {
+  width: 77px;
+}
+
+#keyboard .left-shift {
+  width: 95px;
+}
+
+#keyboard .right-shift {
+  width: 109px;
+}
+
+.lastitem {
+  margin-right: 0;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+#keyboard .space {
+  clear: left;
+  width: 660px;
+}
+
+.on {
+  display: none;
+}
+
+#keyboard li:hover {
+  position: relative;
+  top: 1px;
+  left: 1px;
+  border-color: #e5e5e5;
+  cursor: pointer;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.heading {
+  margin-bottom: 20px;
+  font-size: 3rem;
+  color: black;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.speed,
+.timer,
+.errors,
+.accuracy,
+.cpm,
+.wpm {
+  background-color: blue;
+  height: 80px;
+  width: 90px;
+  margin: 8px;
+  padding: 12px;
+  border-radius: 20%;
+  color: white;
+}
+
+.cpm,
+.wpm {
+  display: none;
+}
+
+.header_text {
+  text-transform: uppercase;
+  font-size: 0.6rem;
+  font-weight: 600;
+}
+
+.curr_speed,
+.curr_time,
+.curr_errors,
+.curr_accuracy,
+.curr_cpm,
+.curr_wpm {
+  font-size: 1.75 rem;
+}
+
+.textOutput {
+  font-size: 26px;
+  padding: 10px;
+}
+.correct {
+  color: green;
+}
+
+.incorrect {
+  color: red;
+  text-decoration: underline;
+}

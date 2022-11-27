@@ -1,0 +1,36 @@
+@import "bootstrap/dist/css/bootstrap-grid.min.css";
+
+html,
+body {
+  height: 100%;
+  background: #eee;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.main-container {
+  /* 100% of viewport height */
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  padding: 20px;
+  flex-grow: 1;
+}
+
+.vertical-center {
+  min-height: 100%; /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
+
+.container-home {
+  display: flex;
+  justify-content: center;
+}

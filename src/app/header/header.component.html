@@ -1,0 +1,30 @@
+<header class="header">
+  <mat-toolbar color="primary">
+    <h2>Hello {{ decodedToken?.email }}</h2>
+    <!-- <span class="spacer">
+      <button class="start-btn" mat-stroked-button>Start Training</button>
+    </span> -->
+
+    <div class="log-block">
+      <button mat-icon-button routerLink="/app-profile-page">
+        <mat-icon aria-hidden="false">account_box</mat-icon>
+      </button>
+
+      <button
+        *ngIf="accountService.isAuth()"
+        mat-icon-button
+        (click)="logout()"
+      >
+        <mat-icon aria-hidden="false">logout</mat-icon>
+      </button>
+
+      <button
+        *ngIf="!accountService.isAuth()"
+        mat-icon-button
+        routerLink="/account/login"
+      >
+        <mat-icon aria-hidden="false">login</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+</header>
