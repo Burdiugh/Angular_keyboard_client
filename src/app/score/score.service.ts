@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { ReturnStatement } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IScore } from './Iscore';
+import { IScore } from './IScore';
+
 
 
 @Injectable({

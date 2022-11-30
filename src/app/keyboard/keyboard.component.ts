@@ -2,10 +2,11 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { interval } from 'rxjs';
 import { AccountService } from '../account/account.service';
 import { AppStateService } from '../app-state.service';
+import { IScore } from '../score/IScore';
 import { ScoreService } from '../score/score.service';
 import { TextService } from '../text-service/text.service';
 import { IText } from '../text-service/textInterface';
-import {IScore} from '../score/Iscore'
+
 
 @Component({
   selector: 'app-keyboard',
