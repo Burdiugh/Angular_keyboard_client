@@ -1,7 +1,11 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { interval } from 'rxjs';
+import { AccountService } from '../account/account.service';
 import { AppStateService } from '../app-state.service';
+import { ScoreService } from '../score/score.service';
 import { TextService } from '../text-service/text.service';
 import { IText } from '../text-service/textInterface';
+import {IScore} from '../score/Iscore'
 
 @Component({
   selector: 'app-keyboard',
@@ -16,21 +20,27 @@ export class KeyboardComponent implements OnInit {
   inputValue: string = '';
   quoteId: number = 1;
   isInputBlocked: boolean = false;
+  symbolsCount : number = 0;
   errors: number = 0;
   speed: number = 0;
-  occuracy: number = 0;
+  accuracy: number = 0;
+  isGameStarted : boolean = false;
+  score:number =0;
 
   timeElapsed = 0;
-  timeLeft: number = 15;
+  timeLeft: number = 10;
   timer = null;
-  // interval: any;
+  
+   interval: any;
 
   textInput = <HTMLInputElement>document.getElementById('textInput');
 
   constructor(
     public textService: TextService,
     private stateService: AppStateService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private accountService: AccountService,
+    private scoreService:ScoreService,
   ) {}
 
   ngOnInit(): void {
@@ -57,8 +67,8 @@ export class KeyboardComponent implements OnInit {
       this.cdr.markForCheck();
     });
 
-    this.stateService.occuracy$.subscribe((occuracy) => {
-      this.occuracy = occuracy;
+    this.stateService.accuracy$.subscribe((accuracy) => {
+      this.accuracy = accuracy;
       this.cdr.markForCheck();
     });
   }
@@ -75,45 +85,85 @@ export class KeyboardComponent implements OnInit {
       this.timeLeft + 's';
     } else {
       // finish the game
-      finishGame();
+      this.finishGame();
     }
   }
 
-  startGame() {
+  finishGame(){
+    alert("time has gone!");
+    var score = this.sumScore();
+   // console.log(this.sumScore());
+   // console.log(score);
+    
+    
+    if(score!=null){
+      //console.log("score accuracy: "+score.accuracy);
+      //console.log(score);
+      
+     this.scoreService.addScore(score).subscribe(()=>{
+      //console.log("Score: "+ score+"\n\nwas succesffully aded.");
+     },
+     (error) => {
+      let message = error.error.Message;
+      console.log(error);
+      console.log(message);
+    });
+    }
+    this.isGameStarted = false;
+    this.pauseTimer();
     this.resetRound();
-
-    // clear old and start a new timer
-    clearInterval(this.timer);
-    this.timer = setInterval(updateTimer, 1000);
   }
 
-  //  startTimer() {
-  //     this.interval = setInterval(() => {
-  //       if (this.timeLeft > 0) {
-  //         this.timeLeft--;
-  //       } else {
-  //         this.timeLeft = 5;
-  //       }
-  //     }, 1000);
-  //   }
 
-  // pauseTimer() {
-  //   clearInterval(this.interval);
-  // }
+   startTimer() {
+      this.interval = setInterval(() => {
+        if (this.timeLeft > 0) {
+          this.timeLeft--;
+          this.timeElapsed++;
+        } else {
+          this.finishGame();
+          this.timeLeft = 15;
+          this.timeElapsed = 0;
+        }
+      }, 1000);
+    }
+
+  pauseTimer() {
+    clearInterval(this.interval);
+  }
 
   nextQuote() {
+   
     this.quoteId++;
     this.setQuote(this.quoteId);
     this.inputValue = '';
     this.textInput.value = '';
     this.index = 0;
+ 
+
+  }
+
+  sumScore(){
+    this.score = this.errors+this.accuracy+this.speed;
+    let id = this.accountService.getIdOfLoginedUser();
+      
+    if(id!=null){
+   var newScore:IScore={
+       appUserId:id,
+       score:this.score,
+       errors:this.errors,
+       accuracy:this.accuracy,
+       speed:this.speed
+    }
+    return newScore;
+  }
+  else{
+    return null;
+  }
   }
 
   resetRound() {
-    alert('time has gone');
-    // this.pauseTimer();
-    //this.timeLeft = 15;
-
+   
     setTimeout(() => {
       this.stateService.reset();
       this.quoteId = 1;
@@ -121,11 +171,17 @@ export class KeyboardComponent implements OnInit {
       this.inputValue = '';
       this.textInput.value = '';
       this.index = 0;
+      this.symbolsCount = 0;
     }, 1000);
   }
 
   onKey(event: any) {
-    console.log(event.target.value[event.target.value.length - 1]);
+      this.symbolsCount++;
+      if(!this.isGameStarted){
+        this.startTimer();
+        this.isGameStarted = true;
+      }
+
     if (this.inputValue.length == this.followingChars.length - 1) {
       this.nextQuote();
     } else {
@@ -143,8 +199,15 @@ export class KeyboardComponent implements OnInit {
         this.stateService.addError();
       }
     }
-    this.stateService.addSpeed(
-      Math.round((this.inputValue.length / this.timeElapsed) * 60)
+    this.stateService.setSpeed(
+      Math.round((this.symbolsCount / this.timeElapsed) * 60)
     );
+
+    this.stateService.setAccuracy(
+      Math.round((this.symbolsCount / this.errors) * 10)
+    );
+  
+    console.log(this.symbolsCount);
+    
   }
 }

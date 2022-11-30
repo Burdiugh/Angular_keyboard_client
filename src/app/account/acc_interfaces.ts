@@ -24,6 +24,7 @@ export interface ILoginRequest {
   }
 
   export interface IToken{
+    nameid:string,
     email:string,
     exp: string,
     role:string,

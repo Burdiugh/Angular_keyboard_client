@@ -14,7 +14,8 @@ export class ProfilePageComponent {
 
   constructor(private accountService: AccountService) {
     this.decodedToken = this.accountService.getDecodedAccessToken();
-
+      console.log(this.decodedToken);
+      
    }
 
 

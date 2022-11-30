@@ -30,6 +30,11 @@ export class AccountService {
     );
   }
 
+getIdOfLoginedUser(){
+  var token = this.getDecodedAccessToken();
+  return token?.nameid;
+}
+
   isAuth(): boolean {
     return localStorage.getItem(this.tokenKey) != null;
   }
