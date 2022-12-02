@@ -19,7 +19,7 @@ export class KeyboardComponent implements OnInit {
   followingChars: string[] = [];
   index: number = 0;
   inputValue: string = '';
-  quoteId: number = 1;
+  quoteId: number = 3;
   isInputBlocked: boolean = false;
   symbolsCount : number = 0;
   errors: number = 0;
@@ -29,7 +29,7 @@ export class KeyboardComponent implements OnInit {
   score:number =0;
 
   timeElapsed = 0;
-  timeLeft: number = 10;
+  timeLeft: number = 60;
   timer = null;
   
    interval: any;
@@ -50,8 +50,11 @@ export class KeyboardComponent implements OnInit {
     this.textInput = <HTMLInputElement>document.getElementById('textInput');
   }
 
+  
+
   setQuote(id: number) {
     this.textService.getTextById(id).subscribe((res) => {
+      console.log(res);
       this.followingText = res;
       this.followingChars = Array.from(this.followingText.text);
     });
@@ -123,7 +126,7 @@ export class KeyboardComponent implements OnInit {
           this.timeElapsed++;
         } else {
           this.finishGame();
-          this.timeLeft = 15;
+          this.timeLeft = 60;
           this.timeElapsed = 0;
         }
       }, 1000);
@@ -145,7 +148,7 @@ export class KeyboardComponent implements OnInit {
   }
 
   sumScore(){
-    this.score = this.errors+this.accuracy+this.speed;
+    this.score = this.accuracy+(this.speed - this.errors);
     let id = this.accountService.getIdOfLoginedUser();
       
     if(id!=null){
@@ -167,7 +170,7 @@ export class KeyboardComponent implements OnInit {
    
     setTimeout(() => {
       this.stateService.reset();
-      this.quoteId = 1;
+      this.quoteId = 3;
       this.setQuote(this.quoteId);
       this.inputValue = '';
       this.textInput.value = '';
@@ -204,11 +207,10 @@ export class KeyboardComponent implements OnInit {
       Math.round((this.symbolsCount / this.timeElapsed) * 60)
     );
 
-    this.stateService.setAccuracy(
-      Math.round((this.symbolsCount / this.errors) * 10)
-    );
-  
-    console.log(this.symbolsCount);
+    let correctCharacters = (this.symbolsCount - this.errors);
+    let accuracyVal = ((correctCharacters / this.symbolsCount) * 100);
+    this.stateService.setAccuracy(Math.round(accuracyVal));
+
     
   }
 }

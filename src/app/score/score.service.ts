@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { ReturnStatement } from '@angular/compiler';
 import { Injectable } from '@angular/core';
+import { IsActiveMatchOptions } from '@angular/router';
 import { Observable } from 'rxjs';
 import { IScore } from './IScore';
 
@@ -25,8 +26,12 @@ export class ScoreService {
  return this.httpClient.get<IScore>(this.apiUrl+"score/"+id);
   }
 
-  getAllScores():Observable<IScore>{
-    return this.httpClient.get<IScore>(this.apiUrl+"score");
+  getAllScores():Observable<IScore[]>{
+    return this.httpClient.get<IScore[]>(this.apiUrl+"score");
+  }
+
+  getAllByUserId(id:string):Observable<IScore[]>{
+    return this.httpClient.get<IScore[]>(this.apiUrl+"score/"+"byUserId/"+id);
   }
 
 }

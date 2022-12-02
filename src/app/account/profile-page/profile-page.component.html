@@ -1,7 +1,37 @@
-<p>profile-page works!</p> 
+<header class="header">
+    <mat-toolbar class="mat-toolbar" color="primary">
+        
+            <span>
+                <button class="nav-btn"  routerLink="/" mat-stroked-button>Back</button>
+            </span>
+            <span>
+                <button class="nav-btn" (onclick)="showScores()" mat-stroked-button>Show scores</button>
+            </span>
+            <span>
+               
+            </span>
+     
+    </mat-toolbar>
+</header>
 
-<div *ngIf="decodedToken">
-<h2>{{decodedToken.email}}</h2>
-<h2>{{decodedToken.nameid}}</h2>
-<h2>{{decodedToken.role}}</h2>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2>Account description:</h2>
+            <div *ngIf="decodedToken">
+                <h4>{{decodedToken.email}}</h4>
+                <h4>{{decodedToken.nameid}}</h4>
+                <h4>{{decodedToken.role}}</h4>
+            </div>
+        </div>
+        <div class="col">
+            <h2>Your scores:</h2>
+            <div class="score-container">
+            <ul *ngFor="let score of scores;">
+                <li [innerHTML]="score.score"></li>
+            </ul>
+        </div>
+        </div>
+    </div>
+   
 </div>

@@ -15,8 +15,8 @@ export class TextService {
     return this.httpClient.get<IText>(this.apiUrl + 'text/' + id);
   }
 
-  getAllText(): Observable<IText> {
-    return this.httpClient.get<IText>(this.apiUrl + 'text/');
+  getAllText(): Observable<IText[]> {
+    return this.httpClient.get<IText[]>(this.apiUrl + 'text/');
   }
 
   DeleteById(id: string): void {

@@ -31,15 +31,16 @@
           id="textInput"
           [(ngModel)]="inputValue"
           autofocus
+          autocomplete="off"
           (input)="onKey($event)"
         />
 
         <div id="textOutput" class="textOutput">
           <span *ngFor="let symbol of followingChars; index as i">
-            <span
+            <span 
               [innerHTML]="symbol"
-              [class.correct]="symbol === inputValue[inputValue.length - 1]"
-              [class.incorrect]="symbol != inputValue[inputValue.length - 1]"
+              [class.correct]="symbol === inputValue[inputValue.length - 1] && i <= inputValue.length-1"
+              [class.incorrect]="symbol != inputValue[inputValue.length - 1] && i == inputValue.length-1"
             ></span>
           </span>
         </div>

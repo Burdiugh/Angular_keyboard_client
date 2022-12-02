@@ -148,3 +148,7 @@
   color: red;
   text-decoration: underline;
 }
+
+.textOutput {
+  line-height: 110%;
+}
