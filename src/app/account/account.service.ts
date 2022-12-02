@@ -15,7 +15,7 @@ import {
   providedIn: 'root',
 })
 export class AccountService {
-  private apiUrl: string = 'https://localhost:7059/api/';
+  private apiUrl: string = 'https://keyboard-server-3.azurewebsites.net/api/';
   private readonly tokenKey: string = 'tokenKey';
 
   constructor(

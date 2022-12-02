@@ -11,7 +11,7 @@ import { IScore } from './IScore';
   providedIn: 'root'
 })
 export class ScoreService {
-  private apiUrl: string = 'https://localhost:7059/api/';
+  private apiUrl: string = 'https://keyboard-server-3.azurewebsites.net/api/';
 
   constructor(
     private httpClient: HttpClient,
