@@ -21,7 +21,7 @@ export class ResetPasswordComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     this.resetPasswordForm = fb.group({
-      newPassword: ['burdiugh.bk@gmail.com', Validators.required],
+      newPassword: ['', Validators.required],
     });
   }
   ngOnInit(): void {
