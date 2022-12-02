@@ -4,9 +4,9 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\account",
-    "\\src\\app\\account\\profile-page",
-    "\\src\\app\\score"
+    "\\src\\app\\score",
+    "\\src\\app\\text-service"
   ],
-  "SelectedNode": "\\src\\app\\account\\profile-page\\profile-page.component.html",
+  "SelectedNode": "\\src\\app\\account\\account.service.ts",
   "PreviewInSolutionExplorer": false
 }

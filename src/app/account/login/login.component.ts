@@ -21,8 +21,8 @@ export class LoginComponent {
       private router: Router
       ) {
     this.loginForm = fb.group({
-      login: ['mainadmin@gmail.com', Validators.required],
-      password: ['mainAdmin_1703', Validators.required]
+      login: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
 
