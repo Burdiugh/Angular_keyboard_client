@@ -18,7 +18,7 @@ export class ResetPasswordRequestComponent {
     private router: Router
   ) {
     this.resetPasswordRequestForm = fb.group({
-      email: ['burdiugh.bk@gmail.com', Validators.required],
+      email: ['', Validators.required],
     });
     this.flag = false;
   }
